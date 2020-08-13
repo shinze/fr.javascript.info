@@ -10,8 +10,7 @@ Le principe des transitions CSS est simple. On décrit une propriété et commen
 
 Donc, on n’a besoin que de changer une propriété. Et la transition fluide est réalisée par le navigateur.
 
-Par exempel, le code CSS ci-dessous anime les changements de `background-color` pendant 3 secondes :
-
+Par exemple, le code CSS ci-dessous anime les changements de `background-color` pendant 3 secondes :
 
 ```css
 .animated {
@@ -20,12 +19,12 @@ Par exempel, le code CSS ci-dessous anime les changements de `background-color` 
 }
 ```
 
-Maintenant si un élément porte l’attribut class `.animated`, chaque changement de la propriété `background-color` sera animé pendant 3 secondes.
+Dès qu’un élément porte l’attribut class `.animated`, chaque changement de sa propriété `background-color` sera animé pendant 3 secondes.
 
 Cliquez sur le bouton ci-dessous pour animer le fond.
 
 ```html run autorun height=60
-<button id="color">Click me</button>
+<button id="color">Cliquez ici</button>
 
 <style>
   #color {
