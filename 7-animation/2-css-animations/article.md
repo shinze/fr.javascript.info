@@ -71,5 +71,16 @@ growing.onclick = function() {
 </script>
 ```
 
-Maintenant nous allons découvrir chacune des propriété.
+Maintenant nous découvrons chacune de ces propriétés.
 
+## transition-property
+
+Avec `transition-property` on peut indiquer la liste des propriétés à animer, par exemple: `left`, `margin-left`, `height`, `color`.
+
+Certaines propriétés ne peuvent être animées, mais [beaucoup](http://www.w3.org/TR/css3-transitions/#animatable-properties-) le sont. La valeurs `all` signifie «animer toutes les propriétés».
+
+## transition-duration
+
+`transition-duration` permet d’indiquer un délai *avant* que l’animation ne commence. Par exemple avec `transition-delay: 1s`, l’animation commence 1 seconde après le changement.
+
+Les valeurs négatives sont possible. L’animation commence alors par son milieu. Par exemple si `transition-duration` est à `2s` et le délai (`transition-delay`) est à `-1s` alors l’animation dure 1 seconde est commence à la moitié.
