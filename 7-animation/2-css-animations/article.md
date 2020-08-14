@@ -10,7 +10,8 @@ Le principe des transitions CSS est simple. On décrit une propriété et commen
 
 Donc, on n’a besoin que de changer une propriété. Et la transition fluide est réalisée par le navigateur.
 
-Par exemple, le code CSS ci-dessous anime les changements de `background-color` pendant 3 secondes :
+Par exempel, le code CSS ci-dessous anime les changements de `background-color` pendant 3 secondes :
+
 
 ```css
 .animated {
@@ -19,12 +20,12 @@ Par exemple, le code CSS ci-dessous anime les changements de `background-color` 
 }
 ```
 
-Dès qu’un élément porte l’attribut class `.animated`, chaque changement de sa propriété `background-color` sera animé pendant 3 secondes.
+Maintenant si un élément porte l’attribut class `.animated`, chaque changement de la propriété `background-color` sera animé pendant 3 secondes.
 
 Cliquez sur le bouton ci-dessous pour animer le fond.
 
 ```html run autorun height=60
-<button id="color">Cliquez ici</button>
+<button id="color">Click me</button>
 
 <style>
   #color {
@@ -83,3 +84,45 @@ Certaines propriétés ne peuvent être animées, mais [beaucoup](http://www.w3.
 `transition-duration` permet d’indiquer un délai *avant* que l’animation ne commence. Par exemple avec `transition-delay: 1s`, l’animation commence 1 seconde après le changement.
 
 Les valeurs négatives sont possible. L’animation commence alors par son milieu. Par exemple si `transition-duration` est à `2s` et le délai (`transition-delay`) est à `-1s` alors l’animation dure 1 seconde est commence à la moitié.
+
+Ici l’animation fait passer les chiffres de 0 à 9 en utilisant la propriété `translate` :
+
+[codetabs src="digits"]
+
+La propriété `transform` est animé de cette manière :
+
+```css
+#stripe.animate {
+  transform: translate(-90%);
+  transition-property: transform;
+  transition-duration: 9s;
+}
+```
+
+Dans l’exemple ci-dessus JavaScript ajoute l’attribut class `.animate` à l’élément -- et l’animation commence :
+
+```js
+stripe.classList.add('animate');
+```
+
+Nous pouvons aussi la commencer «à la moitié», à partir d’un chiffre exact, comme par exemple à la seconde qui correspond en utilisant une valeur négative appliquée à la propriété `transition-delay`.
+
+Ici, si vous cliquez sur le chiffre -- ça lance l’animation à la seconde courante :
+
+[codetabs src="digits-negative-delay"]
+
+En JavaScript, c’est une ligne en plus :
+
+```js
+stripe.onclick = function() {
+  let sec = new Date().getSeconds() % 10;
+*!*
+  // Ici, par exemple, -3s lance l’animation à partir de la 3e seconde
+  stripe.style.transitionDelay = '-' + sec + 's';
+*/!*
+  stripe.classList.add('animate');
+};
+```
+
+## transition-timing-function
+
