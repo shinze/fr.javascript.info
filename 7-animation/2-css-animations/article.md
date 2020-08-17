@@ -126,3 +126,79 @@ stripe.onclick = function() {
 
 ## transition-timing-function
 
+Cette fonction décrit comment l’animation se distribue sur la durée. Est ce cette animation commence doucement pour enfin ralentir ou le contraire.
+
+À première vue cette propriété semble compliquée. Mais devient très simple si vous lui accordez un peu de temps.
+
+Cette propriété accepte deux types de valeurs : une courbe de Bézier ou des étapes. Commençons par la courbe qui est plus courante.
+
+### La courbe de Bézier
+
+La fonction temporelle peut être renseignée avec une [courbe de Bézier](/bezier-curve) ayant 4 poignées de contrôle remplissant les conditions suivantes :
+
+1. Une première poignée : `(0,0)`;
+2. Une dernière poignée: `(1,1)`;
+3. Les poignées intermédiaires la valeur de `x` doit se situer dans l’intervalle `0..1`, `y` peut avoir n’importe quelle valeur.
+
+La syntaxe des courbes de Bézier en CSS : `cubic-bezier(x2, y2, x3, y3)`. Ici, seuls les 2nd et 3e points sont spécifiés car le 1er est à `(0,0)` et le 4e à `(1,1)`.
+
+La fonction temporelle décrit à quelle vitesse se déroule une animation dans le temps.
+
+- L’axe `x` est le temps: `0` -- le début, `1` -- la fin.
+- L’axe `y` indique la progression du processus : `0` -- la valeur de départ de la propriété, `1` -- la valeur finale.
+
+La version la plus simple est quand l’animation se déroule uniformément, avec la même vitesse linéaire. Ce qui peut être fait avec la courbe `cubic-bezier(0, 0, 1, 1)`.
+
+Voici à quoi ressemble cette courbe :
+
+![](bezier-linear.svg)
+
+… Comme il est possible de voir, c’est une simple ligne droite. Lorsque le temps (`x`) passe, l’animation se complète de manière régulière de `0` à `1`.
+
+Le train illustré dans l’exemple ci-dessous va de gauche à droite à une vitesse constante (cliquez le) :
+
+```css
+.train {
+  left: 0;
+  transition: left 5s cubic-bezier(0, 0, 1, 1);
+  /* JavaScript met la valeur de left à 450px */
+}
+```
+
+… Et comment peut-on ralentir un train ?
+
+The graph:
+
+![](train-curve.svg)
+
+Comme nous pouvons le constater, le déroulement est rapide : l’animation s’affole rapidement et va de plus en plus doucement.
+
+Voici la fonction temporelle en action (cliquez sur le train) :
+
+[codetabs src="train"]
+
+CSS:
+```css
+.train {
+  left: 0;
+  transition: left 5s cubic-bezier(0, .5, .5, 1);
+  /* JavaScript met la valeur de left à 450px */
+}
+```
+
+Il y a plusieurs courbes par défaut : `linear`, `ease`, `ease-in`, `ease-out` et `ease-in-out`.
+
+`linear` est un raccourcis pour `bezier-curve(0, 0, 1, 1)` -- une ligne droite, comme nous l’avons déjà vu.
+
+Les autres valeurs sont des raccourcis pour les `cubic-bezier` suivantes :
+
+
+| <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
+|-------------------------------|----------------------|-----------------------|--------------------------|
+| <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
+| ![ease, figure](ease.svg) | ![ease-in, figure](ease-in.svg) | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
+
+`*` -- valeur par défaut, s’il n’y a pas de fonction temporelle c’est `ease` qui est utilisé.
+
+Nous pourrions donc utiliser `ease-out` pour faire ralentir notre train.
+
